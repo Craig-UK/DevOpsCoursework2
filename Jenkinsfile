@@ -38,7 +38,6 @@ pipeline {
                 sshagent(['k8s']) {
                     sh "scp -o StrictHostKeyChecking=no devops.yaml ubuntu@50.19.5.7:/home/ubuntu"
                 script {
-		    sh "ssh ubuntu@50.19.5.7 kubectl create -f ."
 		    sh "ssh ubuntu@50.19.5.7 kubectl set image deployments/devopscoursework2 devopscoursework2=craiguk/devopscoursework2:1.0"
       	         }
 	       }
