@@ -13,7 +13,7 @@ pipeline {
         
         stage('Build Image'){
             steps{
-                sh 'docker image build --tag craiguk/devopscoursework2:2.0 .'
+                sh 'docker image build --tag craiguk/devopscoursework2:3.0 .'
             }
         }
 
@@ -21,7 +21,7 @@ pipeline {
             steps { 
                 script { 
                     docker.withRegistry('', 'docker') { 
-                        sh 'docker image push craiguk/devopscoursework2:2.0' 
+                        sh 'docker image push craiguk/devopscoursework2:3.0' 
                     }
                 } 
             }
@@ -38,7 +38,7 @@ pipeline {
                 sshagent(['k8s']) {
                     sh "scp -o StrictHostKeyChecking=no devops.yaml ubuntu@50.19.5.7:/home/ubuntu"
                 script {
-		    sh "ssh ubuntu@50.19.5.7 kubectl set image deployments/devopscoursework2 devopscoursework2=craiguk/devopscoursework2:2.0"
+		    sh "ssh ubuntu@50.19.5.7 kubectl set image deployments/devopscoursework2 devopscoursework2=craiguk/devopscoursework2:3.0"
       	         }
 	       }
             }
